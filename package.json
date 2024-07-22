@@ -1,0 +1,19 @@
+{
+  "name": "graphql-nosql-bsd16",
+  "version": "1.0.0",
+  "description": "- [Installation](https://www.apollographql.com/docs/apollo-server/getting-started) - [Define type in schema](https://www.apollographql.com/docs/apollo-server/schema/schema) - [Define resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "graphql": "^16.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
