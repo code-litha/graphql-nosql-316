@@ -35,7 +35,7 @@ const typeDefs = `#graphql
 
   # Mutation ini digunakan untuk MENGUBAH / MEMANIPULASI DATA
   type Mutation {
-    addBook(title: String!, author: String!): Book
+    addBook(title: String!, author: String!): Book # endpoint "addBook" meminta parameter "title" dan "author" dengan type String Not Null, yang mereturn Book
   }
 `;
 
@@ -54,7 +54,7 @@ const resolvers = {
       return books
     },
     getBookById: (_parent, args) => {
-      // console.log(args, '<<< args')
+      // console.log(_parent, '<<< args')
       const { bookId } = args
       const book = books.find(el => el.id == bookId)
       return book
