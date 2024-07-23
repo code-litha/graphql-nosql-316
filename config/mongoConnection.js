@@ -29,5 +29,6 @@ const getDatabase = () => {
 // const getDatabase = client.db(dbName) // ini kalau misalkan clientnya gagal connect, bikin error code 
 module.exports = {
   mongoConnect,
-  getDatabase
+  getDatabase,
+  client
 }
