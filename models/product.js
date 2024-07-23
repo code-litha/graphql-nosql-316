@@ -1,25 +1,85 @@
 const { ObjectId } = require("mongodb");
 const { getDatabase } = require("../config/mongoConnection");
+const { GraphQLError } = require("graphql");
 
 const productCollection = () => {
   return getDatabase().collection('products')
 }
 
 const findAllProducts = async () => {
-  const products = await productCollection().find().toArray()
+  const agg = [
+    {
+      '$lookup': {
+        'from': 'users', 
+        'localField': 'authorId', 
+        'foreignField': '_id', 
+        'as': 'author'
+      }
+    }, {
+      '$unwind': {
+        'path': '$author', 
+        'preserveNullAndEmptyArrays': true
+      }
+    }, {
+      '$project': {
+        'author.password': 0
+      }
+    }, {
+      '$sort': {
+        'name': -1
+      }
+    }
+  ];
+
+  const products = await productCollection().aggregate(agg).toArray()
+  // console.log(products, '<<< products')
+  // const products = await productCollection().find().toArray()
 
   return products
 }
 
 const findOneProductById = async (id) => {
-  const product = await productCollection().findOne({
-    _id: new ObjectId(id)
-  })
+  // const product = await productCollection().findOne({
+  //   _id: new ObjectId(id)
+  // })
+  const agg = [
+    {
+      '$lookup': {
+        'from': 'users', 
+        'localField': 'authorId', 
+        'foreignField': '_id', 
+        'as': 'author'
+      }
+    }, {
+      '$unwind': {
+        'path': '$author', 
+        'preserveNullAndEmptyArrays': true
+      }
+    }, {
+      '$project': {
+        'author.password': 0
+      }
+    }, {
+      '$match': {
+        '_id': new ObjectId(id)
+      }
+    }
+  ];
+  const product = await productCollection().aggregate(agg).toArray()
 
-  return product
+  // console.log(product, '<<< product by id')
+  return product[0]
 }
 
 const createProduct = async (payload) => {
+  if (!payload.authorId) {  // contoh validation`
+    throw new GraphQLError('authorId is required', {
+      extensions: {
+        http: { status: 400 }
+      }
+    })
+  }
+
   const newProduct = await productCollection().insertOne(payload)
 
   const dataProduct = await productCollection().findOne({

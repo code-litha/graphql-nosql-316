@@ -1,9 +1,19 @@
-# INTRODUCTION GRAPHQL
+# NOSQL ADVANCE
 
-- [Installation](https://www.apollographql.com/docs/apollo-server/getting-started)
-- [Define type in schema](https://www.apollographql.com/docs/apollo-server/schema/schema)
-- [Define resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers)
+## Table of Contents
 
+### Sesi 1
 
-### Resources
-- [Slide PPT](https://docs.google.com/presentation/d/1q8xxlBckN7sn6E-QC1D7XrgNwbxPgWtF25sJCs0TLkI/edit#slide=id.p7)
+- [Authentication](https://www.apollographql.com/docs/apollo-server/security/authentication/)
+- [Aggregation](https://www.mongodb.com/docs/manual/aggregation/)
+- [Add Embedded Documents](https://www.mongodb.com/docs/manual/reference/operator/update/addToSet/)
+
+### Sesi 2
+
+- [Transaction on MongoDB](https://www.mongodb.com/docs/drivers/node/current/fundamentals/transactions/)
+- [Caching with Redis](https://www.npmjs.com/package/ioredis)
+
+## Reference
+
+- [Slide Sesi 1](https://docs.google.com/presentation/d/1ysbDUB_G4-n1cOP36SOmf2ULfHizWHGPco_96RscoQQ/edit)
+- [Slide Sesi 2](https://docs.google.com/presentation/d/1gXdbYvD1qrjehCW48g7k0lXBGcU8s_P7oLTDZuXoDrY/edit)

@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const { findAllProducts, findOneProductById, createProduct, addImageUrlToProduct } = require("../models/product");
 
 const typeDefs = `#graphql
@@ -8,6 +9,8 @@ const typeDefs = `#graphql
     imgUrl: [String]
     description: String
     tags: [Tag]   #embedded document
+    authorId: ID
+    author: User
   }
 
   type Tag {
@@ -34,7 +37,9 @@ const typeDefs = `#graphql
 
 const resolvers = {
   Query: {
-    getProducts: async () => {
+    getProducts: async (_parent, _args, contextValue) => {
+      const userLogin = await contextValue.authentication()
+      // console.log(userLogin, '<<< contextValue')
       const products = await findAllProducts()
 
       return products
@@ -47,14 +52,16 @@ const resolvers = {
     }
   },
   Mutation: {
-    addProduct: async (_parent, args) => {
+    addProduct: async (_parent, args, contextValue) => {
+      const userLogin = await contextValue.authentication()
       const { name, price, imgUrl, description } = args.input
      
       const dataProduct = await createProduct({
         name,
         price,
         imgUrl,
-        description
+        description,
+        authorId: new ObjectId(userLogin.userId)
       })
 
       return dataProduct

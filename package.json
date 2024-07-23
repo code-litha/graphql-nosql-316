@@ -4,6 +4,7 @@
   "description": "- [Installation](https://www.apollographql.com/docs/apollo-server/getting-started) - [Define type in schema](https://www.apollographql.com/docs/apollo-server/schema/schema) - [Define resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers)",
   "main": "index.js",
   "scripts": {
+    "dev": "npx nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,7 +12,9 @@
   "license": "ISC",
   "dependencies": {
     "@apollo/server": "^4.10.4",
+    "bcryptjs": "^2.4.3",
     "graphql": "^16.9.0",
+    "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.8.0"
   },
   "devDependencies": {
