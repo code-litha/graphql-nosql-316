@@ -17,7 +17,6 @@ const typeDefs = `#graphql
     stock: Int
     imgUrl: [String]
     description: String
-    tags: [Tag]   #embedded document
     authorId: ID
     author: User
   }
@@ -28,10 +27,6 @@ const typeDefs = `#graphql
     userId: ID
     quantity: Int
     totalPrice: Int
-  }
-
-  type Tag {
-    name: String
   }
 
   input CreateProductInput {
