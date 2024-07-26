@@ -21,11 +21,27 @@ export default function AuthProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
-    getToken().then((data) => {
-      setToken(data ? data : "");
-      setIsLoggedIn(data ? true : false);
-    });
+    // getToken().then((data) => {
+    //   setToken(data ? data : "");
+    //   setIsLoggedIn(data ? true : false);
+    // });
+    checkToken();
   }, []);
+
+  const checkToken = async () => {
+    try {
+      const data = await getToken();
+      if (data) {
+        setToken(data);
+        setIsLoggedIn(true);
+      } else {
+        setToken("");
+        setIsLoggedIn(false);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   console.log({ token, isLoggedIn }, "<<< token");
 
   const setTokenLogin = async (value) => {
